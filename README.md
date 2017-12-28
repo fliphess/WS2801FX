@@ -66,6 +66,7 @@ void loop() {
 Effects
 -------
 
+* **Off** - Just off.
 * **Static** - No blinking. Just plain old static light.
 * **Blink** - Normal blinking. 50% on/off time.
 * **Breath** - Does the "standby-breathing" of well known i-Devices. Fixed Speed.
