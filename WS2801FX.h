@@ -90,55 +90,56 @@ const uint8_t PROGMEM gamma8[] = {
 #define BRIGHTNESS_MIN 0
 #define BRIGHTNESS_MAX 255
 
-#define MODE_COUNT 47
+#define MODE_COUNT 48
 
-#define FX_MODE_STATIC                   0
-#define FX_MODE_BLINK                    1
-#define FX_MODE_BREATH                   2
-#define FX_MODE_COLOR_WIPE               3
-#define FX_MODE_COLOR_WIPE_RANDOM        4
-#define FX_MODE_RANDOM_COLOR             5
-#define FX_MODE_SINGLE_DYNAMIC           6
-#define FX_MODE_MULTI_DYNAMIC            7
-#define FX_MODE_RAINBOW                  8
-#define FX_MODE_RAINBOW_CYCLE            9
-#define FX_MODE_SCAN                    10
-#define FX_MODE_DUAL_SCAN               11
-#define FX_MODE_FADE                    12
-#define FX_MODE_THEATER_CHASE           13
-#define FX_MODE_THEATER_CHASE_RAINBOW   14
-#define FX_MODE_RUNNING_LIGHTS          15
-#define FX_MODE_TWINKLE                 16
-#define FX_MODE_TWINKLE_RANDOM          17
-#define FX_MODE_TWINKLE_FADE            18
-#define FX_MODE_TWINKLE_FADE_RANDOM     19
-#define FX_MODE_SPARKLE                 20
-#define FX_MODE_FLASH_SPARKLE           21
-#define FX_MODE_HYPER_SPARKLE           22
-#define FX_MODE_STROBE                  23
-#define FX_MODE_STROBE_RAINBOW          24
-#define FX_MODE_MULTI_STROBE            25
-#define FX_MODE_BLINK_RAINBOW           26
-#define FX_MODE_CHASE_WHITE             27
-#define FX_MODE_CHASE_COLOR             28
-#define FX_MODE_CHASE_RANDOM            29
-#define FX_MODE_CHASE_RAINBOW           30
-#define FX_MODE_CHASE_FLASH             31
-#define FX_MODE_CHASE_FLASH_RANDOM      32
-#define FX_MODE_CHASE_RAINBOW_WHITE     33
-#define FX_MODE_CHASE_BLACKOUT          34
-#define FX_MODE_CHASE_BLACKOUT_RAINBOW  35
-#define FX_MODE_COLOR_SWEEP_RANDOM      36
-#define FX_MODE_RUNNING_COLOR           37
-#define FX_MODE_RUNNING_RED_BLUE        38
-#define FX_MODE_RUNNING_RANDOM          39
-#define FX_MODE_LARSON_SCANNER          40
-#define FX_MODE_COMET                   41
-#define FX_MODE_FIREWORKS               42
-#define FX_MODE_FIREWORKS_RANDOM        43
-#define FX_MODE_MERRY_CHRISTMAS         44
-#define FX_MODE_FIRE_FLICKER            45
-#define FX_MODE_FIRE_FLICKER_SOFT       46
+#define FX_MODE_OFF                      0
+#define FX_MODE_STATIC                   1
+#define FX_MODE_BLINK                    2
+#define FX_MODE_BREATH                   3
+#define FX_MODE_COLOR_WIPE               4
+#define FX_MODE_COLOR_WIPE_RANDOM        5
+#define FX_MODE_RANDOM_COLOR             6
+#define FX_MODE_SINGLE_DYNAMIC           7
+#define FX_MODE_MULTI_DYNAMIC            8
+#define FX_MODE_RAINBOW                  9
+#define FX_MODE_RAINBOW_CYCLE           10
+#define FX_MODE_SCAN                    11
+#define FX_MODE_DUAL_SCAN               12
+#define FX_MODE_FADE                    13
+#define FX_MODE_THEATER_CHASE           14
+#define FX_MODE_THEATER_CHASE_RAINBOW   15
+#define FX_MODE_RUNNING_LIGHTS          16
+#define FX_MODE_TWINKLE                 17
+#define FX_MODE_TWINKLE_RANDOM          18
+#define FX_MODE_TWINKLE_FADE            19
+#define FX_MODE_TWINKLE_FADE_RANDOM     20
+#define FX_MODE_SPARKLE                 21
+#define FX_MODE_FLASH_SPARKLE           22
+#define FX_MODE_HYPER_SPARKLE           23
+#define FX_MODE_STROBE                  24
+#define FX_MODE_STROBE_RAINBOW          25
+#define FX_MODE_MULTI_STROBE            26
+#define FX_MODE_BLINK_RAINBOW           27
+#define FX_MODE_CHASE_WHITE             28
+#define FX_MODE_CHASE_COLOR             29
+#define FX_MODE_CHASE_RANDOM            30
+#define FX_MODE_CHASE_RAINBOW           31
+#define FX_MODE_CHASE_FLASH             32
+#define FX_MODE_CHASE_FLASH_RANDOM      33
+#define FX_MODE_CHASE_RAINBOW_WHITE     34
+#define FX_MODE_CHASE_BLACKOUT          35
+#define FX_MODE_CHASE_BLACKOUT_RAINBOW  36
+#define FX_MODE_COLOR_SWEEP_RANDOM      37
+#define FX_MODE_RUNNING_COLOR           38
+#define FX_MODE_RUNNING_RED_BLUE        39
+#define FX_MODE_RUNNING_RANDOM          40
+#define FX_MODE_LARSON_SCANNER          41
+#define FX_MODE_COMET                   42
+#define FX_MODE_FIREWORKS               43
+#define FX_MODE_FIREWORKS_RANDOM        44
+#define FX_MODE_MERRY_CHRISTMAS         45
+#define FX_MODE_FIRE_FLICKER            46
+#define FX_MODE_FIRE_FLICKER_SOFT       47
 
 // custom orders starting at 10
 #define WS2801_RBG 10
@@ -152,6 +153,7 @@ class WS2801FX : public Adafruit_WS2801 {
     WS2801FX(uint16_t n, uint8_t dpin, uint8_t cpin, uint8_t order=WS2801_RGB)
             : Adafruit_WS2801(n, dpin, cpin)
     {
+      _mode[FX_MODE_OFF]                   = &WS2801FX::strip_off;
       _mode[FX_MODE_STATIC]                = &WS2801FX::mode_static;
       _mode[FX_MODE_BLINK]                 = &WS2801FX::mode_blink;
       _mode[FX_MODE_BREATH]                = &WS2801FX::mode_breath;
@@ -200,6 +202,7 @@ class WS2801FX : public Adafruit_WS2801 {
       _mode[FX_MODE_FIRE_FLICKER]          = &WS2801FX::mode_fire_flicker;
       _mode[FX_MODE_FIRE_FLICKER_SOFT]     = &WS2801FX::mode_fire_flicker_soft;
 
+      _name[FX_MODE_OFF]                   = "Off";
       _name[FX_MODE_STATIC]                = "Static";
       _name[FX_MODE_BLINK]                 = "Blink";
       _name[FX_MODE_BREATH]                = "Breath";
