@@ -50,6 +50,7 @@
   2017-02-02   added external trigger functionality (e.g. for sound-to-light)
   2017-02-02   removed "blackout" on mode, speed or color-change
   2017-09-05   port to WS2801 Library
+  2018-01-20   added OFF mode
 
 */
 
