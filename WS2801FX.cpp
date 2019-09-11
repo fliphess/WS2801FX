@@ -1268,9 +1268,9 @@ void WS2801FX::setPixelColor(uint16_t n, uint32_t c) {
 }
 
 void WS2801FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
-  // r = (pgm_read_byte(&gamma8[r]) * _brightness) >> 8;
-  // g = (pgm_read_byte(&gamma8[g]) * _brightness) >> 8;
-  // b = (pgm_read_byte(&gamma8[b]) * _brightness) >> 8;
+  r = (pgm_read_byte(&gammaR[r]) * _brightness) >> 8;
+  g = (pgm_read_byte(&gammaG[g]) * _brightness) >> 8;
+  b = (pgm_read_byte(&gammaB[b]) * _brightness) >> 8;
 
   if (_order == WS2801_RBG) {
     Adafruit_WS2801::setPixelColor(n, r, b, g);
