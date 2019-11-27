@@ -202,6 +202,7 @@ const uint8_t PROGMEM gammaB[] = {
 
 // custom orders starting at 10
 #define WS2801_RBG 10
+#define WS2801_BGR 11
 
 class WS2801FX : public Adafruit_WS2801 {
 
